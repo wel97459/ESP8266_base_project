@@ -16,9 +16,9 @@ SRCS:=driver/uart.c \
 	user/main.c
 
 #You will need to change this if the installation of your compiler is in some other location.
-GCC_FOLDER:=/opt/Espressif/esp-open-sdk/xtensa-lx106-elf
-ESPTOOL_PY:=/opt/Espressif/esptool/esptool.py
-SDK:=/opt/Espressif/esp-open-sdk/sdk
+GCC_FOLDER:=/opt/espressif/esp-open-sdk/xtensa-lx106-elf
+ESPTOOL_PY:=/opt/espressif/esptool/esptool.py
+SDK:=/opt/espressif/esp-open-sdk/sdk
 
 XTLIB:=$(SDK)/lib
 XTGCCLIB:=$(GCC_FOLDER)/lib/gcc/xtensa-lx106-elf/4.8.2/libgcc.a
