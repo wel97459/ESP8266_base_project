@@ -17,7 +17,7 @@ SRCS:=driver/uart.c \
 
 #You will need to change this if the installation of your compiler is in some other location.
 GCC_FOLDER:=/opt/espressif/esp-open-sdk/xtensa-lx106-elf
-ESPTOOL_PY:=/opt/espressif/esptool/esptool.py
+ESPTOOL_PY:=esptool
 SDK:=/opt/espressif/esp-open-sdk/sdk
 
 XTLIB:=$(SDK)/lib
@@ -64,11 +64,11 @@ $(TARGET_OUT) : $(SRCS)
 
 $(FW_FILE_1): $(TARGET_OUT)
 	@echo "FW $@"
-	$(FW_TOOL) -eo $(TARGET_OUT) -bo $@ -bs .text -bs .data -bs .rodata -bc -ec
+	$(ESPTOOL_PY) -eo $(TARGET_OUT) -bo $@ -bs .text -bs .data -bs .rodata -bc -ec
 
 $(FW_FILE_2): $(TARGET_OUT)
 	@echo "FW $@"
-	$(FW_TOOL) -eo $(TARGET_OUT) -es .irom0.text $@ -ec
+	$(ESPTOOL_PY) -eo $(TARGET_OUT) -es .irom0.text $@ -ec
 
 #this is the default command line to do the programming of the ESP8266.
 burn : $(FW_FILE_1) $(FW_FILE_2)
