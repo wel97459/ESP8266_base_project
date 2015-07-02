@@ -26,8 +26,9 @@ FOLDERPREFIX:=$(GCC_FOLDER)/bin
 PREFIX:=$(FOLDERPREFIX)/xtensa-lx106-elf-
 CC:=$(PREFIX)gcc
 
-PORT:=/dev/ttyUSB0
+#PORT:=/dev/ttyUSB0
 #PORT:=/dev/ttyACM0
+PORT:=/dev/ttyS3 #cygwin uses this as the com port
 
 #This is flags for the compiler to know where to find include files, and other settings.
 CFLAGS:=-mlongcalls -I$(SDK)/include -Imyclib -Iinclude -Iuser -Os -I$(SDK)/include/
@@ -72,7 +73,7 @@ $(FW_FILE_2): $(TARGET_OUT)
 
 #this is the default command line to do the programming of the ESP8266.
 burn : $(FW_FILE_1) $(FW_FILE_2)
-	($(ESPTOOL_PY) --port $(PORT) write_flash 0x00000 0x00000.bin 0x40000 0x40000.bin)||(true)
+	(esptool.py -p $(PORT) -b 115200 write_flash 0x00000 0x00000.bin 0x40000 0x40000.bin)||(true)
 
 clean :
 	rm -rf user/*.o driver/*.o $(TARGET_OUT) $(FW_FILE_1) $(FW_FILE_2)
